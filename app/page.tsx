@@ -64,6 +64,30 @@ const experiences = [
   },
 ];
 
+const certifications = [
+  {
+    title: "Surat Keterangan Lulus S1 Teknik Informatika",
+    issuer: "Universitas Pelita Bangsa",
+    year: "2026",
+    image: "/certificates/surat-keterangan-lulus-2026.jpg",
+    description: "Dokumen kelulusan setelah menyelesaikan seluruh mata kuliah dan dinyatakan lulus ujian skripsi.",
+  },
+  {
+    title: "Sertifikat Keahlian Teknik Komputer dan Jaringan",
+    issuer: "SMK 10 November Cibitung / PT Uninet Media Sakti",
+    year: "2017",
+    image: "/certificates/sertifikat-keahlian-tkj.jpg",
+    description: "Certificate of Skill Passport untuk kompetensi keahlian Teknik Komputer dan Jaringan.",
+  },
+  {
+    title: "Praktik Kerja Lapangan",
+    issuer: "PT Suzuki Indomobil Motor — Plant Cikarang",
+    year: "2018",
+    image: "/certificates/pkl-suzuki-2018.jpg",
+    description: "Surat keterangan telah melaksanakan PKL pada September–November 2018.",
+  },
+];
+
 function SectionHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
   return (
     <div className="mb-12 max-w-2xl">
@@ -278,14 +302,26 @@ export default function Home() {
       </section>
 
       <section id="certifications" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 py-24 lg:px-8">
-        <div className="reveal"><SectionHeading eyebrow="04 / Certifications" title="Ruang untuk bukti kompetensi." description="Tambahkan sertifikat jaringan, sistem, cloud, atau kompetensi IT lainnya di bagian ini. Placeholder di bawah siap diganti dengan data asli." /></div>
-        <div className="grid gap-4 md:grid-cols-3">
-          {["Sertifikasi Jaringan / Mikrotik", "Sertifikasi Komputer / IT Support", "Sertifikasi Tambahan"].map((title, index) => (
-            <article key={title} className="reveal glass glass-hover rounded-3xl p-6">
-              <div className="flex items-center justify-between"><div className="grid h-11 w-11 place-items-center rounded-2xl bg-violet-400/10 text-violet-300"><Icon.Shield size={19} /></div><span className="text-[10px] font-mono text-slate-600">CERT-0{index + 1}</span></div>
-              <h3 className="mt-7 text-lg font-semibold text-white">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-500">Nama sertifikasi • Lembaga penerbit • Tahun</p>
-              <button type="button" className="mt-6 inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 hover:text-cyan-200">Tambahkan credential <Icon.ArrowUpRight size={14} /></button>
+        <div className="reveal"><SectionHeading eyebrow="04 / Certifications & Documents" title="Bukti pendidikan, kompetensi, dan pengalaman." description="Beberapa dokumen pendukung yang relevan dengan perjalanan pendidikan dan fondasi teknis saya. Untuk keamanan publik, bagian data identitas sensitif pada preview telah disamarkan." /></div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {certifications.map((cert, index) => (
+            <article key={cert.title} className="reveal group overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60 shadow-2xl shadow-blue-950/20 transition duration-300 hover:-translate-y-1 hover:border-blue-400/30">
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+                <img src={cert.image} alt={cert.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/90 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full border border-blue-300/20 bg-slate-950/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-200 backdrop-blur">DOC-0{index + 1}</span>
+              </div>
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-base font-semibold leading-6 text-white">{cert.title}</h3>
+                    <p className="mt-2 text-xs font-medium text-blue-300">{cert.issuer}</p>
+                  </div>
+                  <span className="shrink-0 rounded-lg border border-white/8 bg-white/5 px-2.5 py-1 text-[10px] font-mono text-slate-500">{cert.year}</span>
+                </div>
+                <p className="mt-4 text-sm leading-6 text-slate-500">{cert.description}</p>
+                <a href={cert.image} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition hover:text-cyan-200">Lihat dokumen <Icon.ArrowUpRight size={14} /></a>
+              </div>
             </article>
           ))}
         </div>
@@ -299,8 +335,8 @@ export default function Home() {
           </div>
           <div className="mt-10 flex flex-wrap gap-3 border-t border-white/8 pt-6">
             <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Github size={16} /> github.com/namasayafrans</a>
-            <a href="https://instagram.com/fransp_sinaga" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Instagram size={16} /> @fransp_sinaga</a>
-            <a href="https://facebook.com/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Facebook size={16} /> Frans Putra Sinaga</a>
+            <a href="https://www.instagram.com/fransp_sinaga?stkn=YWM0ZWt3NTdkenB5" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Instagram size={16} /> @fransp_sinaga</a>
+            <a href="https://www.facebook.com/profile.php?id=100004485286793" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Facebook size={16} /> Frans Putra Sinaga</a>
           </div>
         </div>
       </section>
