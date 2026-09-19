@@ -76,7 +76,13 @@ const projects = [
     stack: ["HTML5", "CSS3", "JavaScript", "PHP Native", "MySQL"],
     features: ["Material catalog", "Live stock monitoring", "Low-stock alert", "Production estimation", "Stock reporting"],
     github: "https://github.com/namasayafrans/sistem-informasi-pengendalian-material-",
-    demo: "https://materialku-bsm.site.je",
+    demo: "https://materialku-bsm.site.je/?i=1",
+    screenshots: [
+      { src: "/projects/bsm/dashboard.png", label: "Landing page / overview" },
+      { src: "/projects/bsm/admin.png", label: "Admin dashboard" },
+      { src: "/projects/bsm/supervisor.png", label: "Supervisor dashboard" },
+      { src: "/projects/bsm/login.png", label: "Authentication screen" },
+    ],
   },
 ];
 
@@ -120,6 +126,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [showTop, setShowTop] = useState(false);
+  const [selectedProjectImage, setSelectedProjectImage] = useState<string | null>(null);
 
   useEffect(() => {
     const sections = ["home", ...navItems.map(([, id]) => id)]
@@ -308,42 +315,38 @@ export default function Home() {
         <div className="reveal">
           <SectionHeading
             eyebrow="03 / Projects"
-            title="Project nyata yang menunjukkan cara saya memahami sistem."
-            description="Saya tidak hanya memahami sisi jaringan dan infrastruktur, tetapi juga bagaimana sebuah sistem informasi mendukung proses operasional. Project ini menjadi contoh pengalaman tersebut."
+            title="Project nyata yang bisa langsung dilihat."
+            description="Salah satu project yang paling relevan dengan perjalanan saya adalah Sistem Informasi Pengendalian Material untuk mendukung alur operasional produksi di PT Batara Sura Mulia."
           />
         </div>
 
         {projects.map((project) => (
           <article key={project.title} className="reveal overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-2xl shadow-blue-900/10">
-            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="relative min-h-[330px] overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-600 p-7 text-white sm:p-9">
-                <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-blue-300/20 blur-3xl" />
-                <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-cyan-300/15 blur-3xl" />
-                <div className="relative flex h-full flex-col justify-between">
-                  <div>
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-100">Featured Project</span>
-                      <span className="font-mono text-[10px] text-blue-100">BSM / 2026</span>
-                    </div>
-                    <div className="mt-12 grid grid-cols-2 gap-3">
-                      <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
-                        <Icon.Database size={22} className="text-blue-200" />
-                        <div className="mt-5 text-xs font-semibold">Material Control</div>
-                        <div className="mt-1 text-[10px] leading-5 text-blue-100/70">Data & inventory workflow</div>
-                      </div>
-                      <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
-                        <Icon.Server size={22} className="text-blue-200" />
-                        <div className="mt-5 text-xs font-semibold">Operational System</div>
-                        <div className="mt-1 text-[10px] leading-5 text-blue-100/70">Supports production process</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-10 flex items-center gap-3 text-xs text-blue-100/80">
-                    <span className="h-2 w-2 rounded-full bg-emerald-300" /> Web-based system • Native stack
-                  </div>
+            <div className="border-b border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-5 sm:p-7">
+              <div className="grid gap-4 lg:grid-cols-[1.55fr_.45fr]">
+                <button
+                  type="button"
+                  onClick={() => setSelectedProjectImage(project.screenshots[0].src)}
+                  className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white text-left shadow-lg shadow-blue-900/10"
+                  aria-label={`Perbesar ${project.screenshots[0].label}`}
+                >
+                  <img src={project.screenshots[0].src} alt={`${project.title} — ${project.screenshots[0].label}`} className="h-full min-h-[250px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02] sm:min-h-[330px]" />
+                  <span className="absolute bottom-4 left-4 rounded-full border border-white/70 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-700 shadow backdrop-blur">Live project preview</span>
+                  <span className="absolute bottom-4 right-4 rounded-full bg-slate-900/80 px-3 py-1.5 text-[10px] font-medium text-white opacity-0 transition group-hover:opacity-100">Click to enlarge</span>
+                </button>
+
+                <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
+                  {project.screenshots.slice(1).map((shot) => (
+                    <button key={shot.src} type="button" onClick={() => setSelectedProjectImage(shot.src)} className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm" aria-label={`Perbesar ${shot.label}`}>
+                      <img src={shot.src} alt={`${project.title} — ${shot.label}`} className="h-full min-h-[105px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" />
+                      <span className="absolute inset-x-2 bottom-2 rounded-lg bg-slate-950/70 px-2 py-1.5 text-[9px] font-medium text-white opacity-0 transition group-hover:opacity-100">{shot.label}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
+            </div>
 
+            <div className="grid lg:grid-cols-[1fr_.82fr]">
               <div className="p-7 sm:p-9">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                   <div>
@@ -364,8 +367,10 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+              </div>
 
-                <div className="mt-7">
+              <div className="border-t border-blue-100 bg-slate-50/70 p-7 sm:p-9 lg:border-l lg:border-t-0">
+                <div className="rounded-2xl border border-blue-100 bg-white p-5 shadow-sm">
                   <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Tech stack</div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {project.stack.map((tech) => (
@@ -374,12 +379,17 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="mt-8 flex flex-col gap-3 border-t border-blue-100 pt-6 sm:flex-row">
-                  <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
-                    <Icon.Github size={16} /> View on GitHub <Icon.ArrowUpRight size={14} />
-                  </a>
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-blue-50 px-5 py-3 text-xs font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-100">
+                <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50/70 p-5">
+                  <div className="text-xs font-semibold text-slate-900">Yang bisa dilihat recruiter</div>
+                  <p className="mt-2 text-xs leading-6 text-slate-600">Dashboard, autentikasi, tampilan admin, dan supervisor menunjukkan bahwa project ini bukan sekadar halaman statis, tetapi sistem dengan beberapa alur pengguna.</p>
+                </div>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
                     Live Demo <Icon.ArrowUpRight size={14} />
+                  </a>
+                  <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-5 py-3 text-xs font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50">
+                    <Icon.Github size={16} /> Source Code <Icon.ArrowUpRight size={14} />
                   </a>
                 </div>
               </div>
@@ -449,6 +459,15 @@ export default function Home() {
       </footer>
 
       {showTop && <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-xl border border-blue-100 bg-white/95 text-slate-700 shadow-2xl backdrop-blur transition hover:-translate-y-1 hover:border-blue-200 hover:text-blue-600" aria-label="Kembali ke atas">↑</button>}
+
+      {selectedProjectImage && (
+        <div className="fixed inset-0 z-[100] grid place-items-center bg-slate-950/75 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" onClick={() => setSelectedProjectImage(null)}>
+          <div className="relative max-h-[92vh] max-w-6xl overflow-hidden rounded-2xl border border-white/20 bg-white p-2 shadow-2xl" onClick={(event) => event.stopPropagation()}>
+            <img src={selectedProjectImage} alt="Project preview enlarged" className="max-h-[88vh] w-auto max-w-full rounded-xl object-contain" />
+            <button type="button" onClick={() => setSelectedProjectImage(null)} className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-slate-950/75 text-lg text-white backdrop-blur transition hover:bg-slate-950" aria-label="Tutup preview">×</button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
