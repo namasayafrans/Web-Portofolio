@@ -25,12 +25,14 @@ const Icon = {
   Server: ({ size = 22, className = "" }: IconProps) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="3" width="16" height="7" rx="2"/><rect x="4" y="14" width="16" height="7" rx="2"/><path d="M8 7h.01M8 18h.01M12 7h4M12 18h4"/></svg>,
   Network: ({ size = 22, className = "" }: IconProps) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M12 7v5M12 12 5 17M12 12l7 5"/></svg>,
   Shield: ({ size = 22, className = "" }: IconProps) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3 20 6v5c0 5.2-3.5 8.6-8 10-4.5-1.4-8-4.8-8-10V6l8-3Z"/><path d="m9 12 2 2 4-4"/></svg>,
+  Database: ({ size = 22, className = "" }: IconProps) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12v7c0 1.66 3.58 3 8 3s8-1.34 8-3v-7"/></svg>,
   Graduation: ({ size = 22, className = "" }: IconProps) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 12v4c3 2 7 2 10 0v-4M21 10v6"/></svg>,
 };
 
 const navItems = [
   ["About", "about"],
   ["Experience", "experience"],
+  ["Projects", "projects"],
   ["Skills", "skills"],
   ["Certifications", "certifications"],
   ["Contact", "contact"],
@@ -61,6 +63,20 @@ const experiences = [
     description:
       "Mendapat pengalaman langsung terkait perangkat keras komputer dan lingkungan kerja industri otomotif, membangun fondasi troubleshooting dan disiplin kerja teknis.",
     tags: ["Hardware", "Troubleshooting", "Industrial Environment"],
+  },
+];
+
+const projects = [
+  {
+    title: "Sistem Informasi Pengendalian Material Produksi Radiator",
+    company: "PT Batara Sura Mulia",
+    description:
+      "Aplikasi web untuk membantu pengelolaan material produksi radiator, memantau stok, memberi peringatan saat persediaan menipis, memperkirakan kebutuhan bahan baku, dan menyediakan laporan stok.",
+    role: "System Information Project",
+    stack: ["HTML5", "CSS3", "JavaScript", "PHP Native", "MySQL"],
+    features: ["Material catalog", "Live stock monitoring", "Low-stock alert", "Production estimation", "Stock reporting"],
+    github: "https://github.com/namasayafrans/sistem-informasi-pengendalian-material-",
+    demo: "https://materialku-bsm.site.je",
   },
 ];
 
@@ -288,8 +304,92 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="projects" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 py-24 lg:px-8">
+        <div className="reveal">
+          <SectionHeading
+            eyebrow="03 / Projects"
+            title="Project nyata yang menunjukkan cara saya memahami sistem."
+            description="Saya tidak hanya memahami sisi jaringan dan infrastruktur, tetapi juga bagaimana sebuah sistem informasi mendukung proses operasional. Project ini menjadi contoh pengalaman tersebut."
+          />
+        </div>
+
+        {projects.map((project) => (
+          <article key={project.title} className="reveal overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-2xl shadow-blue-900/10">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="relative min-h-[330px] overflow-hidden bg-gradient-to-br from-blue-950 via-blue-800 to-blue-600 p-7 text-white sm:p-9">
+                <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-blue-300/20 blur-3xl" />
+                <div className="absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-cyan-300/15 blur-3xl" />
+                <div className="relative flex h-full flex-col justify-between">
+                  <div>
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-blue-100">Featured Project</span>
+                      <span className="font-mono text-[10px] text-blue-100">BSM / 2026</span>
+                    </div>
+                    <div className="mt-12 grid grid-cols-2 gap-3">
+                      <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <Icon.Database size={22} className="text-blue-200" />
+                        <div className="mt-5 text-xs font-semibold">Material Control</div>
+                        <div className="mt-1 text-[10px] leading-5 text-blue-100/70">Data & inventory workflow</div>
+                      </div>
+                      <div className="rounded-2xl border border-white/10 bg-white/10 p-4 backdrop-blur-sm">
+                        <Icon.Server size={22} className="text-blue-200" />
+                        <div className="mt-5 text-xs font-semibold">Operational System</div>
+                        <div className="mt-1 text-[10px] leading-5 text-blue-100/70">Supports production process</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-10 flex items-center gap-3 text-xs text-blue-100/80">
+                    <span className="h-2 w-2 rounded-full bg-emerald-300" /> Web-based system • Native stack
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-7 sm:p-9">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{project.role}</div>
+                    <h3 className="mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-slate-900">{project.title}</h3>
+                    <p className="mt-2 text-sm font-medium text-slate-500">{project.company}</p>
+                  </div>
+                  <div className="shrink-0 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-[10px] font-mono text-blue-700">PROJECT 01</div>
+                </div>
+
+                <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-600">{project.description}</p>
+
+                <div className="mt-7">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Key capabilities</div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.features.map((feature) => (
+                      <span key={feature} className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 text-[11px] text-slate-600">{feature}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-7">
+                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Tech stack</div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <span key={tech} className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-medium text-slate-700 shadow-sm">{tech}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-8 flex flex-col gap-3 border-t border-blue-100 pt-6 sm:flex-row">
+                  <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+                    <Icon.Github size={16} /> View on GitHub <Icon.ArrowUpRight size={14} />
+                  </a>
+                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-blue-50 px-5 py-3 text-xs font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-100">
+                    Live Demo <Icon.ArrowUpRight size={14} />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </section>
+
       <section id="skills" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 py-24 lg:px-8">
-        <div className="reveal"><SectionHeading eyebrow="03 / Skills" title="Toolkit untuk menjaga sistem tetap berjalan." description="Keahlian utama yang menjadi fondasi saya dalam menangani jaringan, perangkat, sistem, dan kebutuhan dukungan IT." /></div>
+        <div className="reveal"><SectionHeading eyebrow="04 / Skills" title="Toolkit untuk menjaga sistem tetap berjalan." description="Keahlian utama yang menjadi fondasi saya dalam menangani jaringan, perangkat, sistem, dan kebutuhan dukungan IT." /></div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill) => (
             <article key={skill.name} className="reveal skill-shine glass glass-hover rounded-2xl p-5">
@@ -302,7 +402,7 @@ export default function Home() {
       </section>
 
       <section id="certifications" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 py-24 lg:px-8">
-        <div className="reveal"><SectionHeading eyebrow="04 / Certifications & Documents" title="Bukti pendidikan, kompetensi, dan pengalaman." description="Beberapa dokumen pendukung yang relevan dengan perjalanan pendidikan dan fondasi teknis saya. Untuk keamanan publik, bagian data identitas sensitif pada preview telah disamarkan." /></div>
+        <div className="reveal"><SectionHeading eyebrow="05 / Certifications & Documents" title="Bukti pendidikan, kompetensi, dan pengalaman." description="Beberapa dokumen pendukung yang relevan dengan perjalanan pendidikan dan fondasi teknis saya. Untuk keamanan publik, bagian data identitas sensitif pada preview telah disamarkan." /></div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, index) => (
             <article key={cert.title} className="reveal group overflow-hidden rounded-3xl border border-blue-100 bg-white/85 shadow-2xl shadow-blue-900/10 transition duration-300 hover:-translate-y-1 hover:border-blue-200">
@@ -330,7 +430,7 @@ export default function Home() {
       <section id="contact" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 pb-24 pt-24 lg:px-8">
         <div className="reveal overflow-hidden rounded-[2rem] border border-blue-200 bg-gradient-to-br from-blue-100/80 via-white/90 to-blue-50/80 p-8 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div><div className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-600">05 / Contact</div><h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Siap berdiskusi tentang jaringan, sistem, dan infrastruktur IT.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-600">Terbuka untuk peluang kerja, networking profesional, project support, dan diskusi seputar IT Infrastructure.</p></div>
+            <div><div className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-600">06 / Contact</div><h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Siap berdiskusi tentang jaringan, sistem, dan infrastruktur IT.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-600">Terbuka untuk peluang kerja, networking profesional, project support, dan diskusi seputar IT Infrastructure.</p></div>
             <a href="mailto:fransputra.sinaga@example.com" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700"><Icon.Mail size={18} /> Email Me <Icon.ArrowUpRight size={16} /></a>
           </div>
           <div className="mt-10 flex flex-wrap gap-3 border-t border-blue-100 pt-6">
