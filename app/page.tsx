@@ -91,11 +91,11 @@ const certifications = [
 function SectionHeading({ eyebrow, title, description }: { eyebrow: string; title: string; description: string }) {
   return (
     <div className="mb-12 max-w-2xl">
-      <div className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">
-        <span className="h-px w-8 bg-cyan-400/60" /> {eyebrow}
+      <div className="mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-600">
+        <span className="h-px w-8 bg-blue-500/60" /> {eyebrow}
       </div>
-      <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{title}</h2>
-      <p className="mt-4 leading-7 text-slate-400">{description}</p>
+      <h2 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">{title}</h2>
+      <p className="mt-4 leading-7 text-slate-600">{description}</p>
     </div>
   );
 }
@@ -142,33 +142,33 @@ export default function Home() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <main className="min-h-screen bg-[#05070b]">
+    <main className="min-h-screen bg-white">
       <div className="pointer-events-none fixed inset-0 -z-0 overflow-hidden">
         <div className="grid-bg absolute inset-0" />
-        <div className="orb absolute -left-28 top-40 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl" />
-        <div className="orb orb-delay absolute -right-24 top-[32rem] h-80 w-80 rounded-full bg-violet-500/10 blur-3xl" />
+        <div className="orb absolute -left-28 top-40 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="orb orb-delay absolute -right-24 top-[32rem] h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
 
       <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
         <div className="glass mx-auto flex max-w-6xl items-center justify-between rounded-2xl px-4 py-3 shadow-2xl shadow-black/20 sm:px-5">
           <a href="#home" onClick={closeMenu} className="flex items-center gap-3" aria-label="Frans Putra Sinaga — Home">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-cyan-300 to-blue-500 text-sm font-black text-slate-950 shadow-lg shadow-cyan-500/20">FP</span>
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 text-sm font-black text-white shadow-lg shadow-cyan-500/20">FP</span>
             <div className="hidden sm:block">
-              <div className="text-sm font-semibold text-white">Frans Putra Sinaga</div>
+              <div className="text-sm font-semibold text-slate-900">Frans Putra Sinaga</div>
               <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500">IT Infrastructure</div>
             </div>
           </a>
 
           <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
             {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} className={`rounded-lg px-3 py-2 text-xs font-medium transition ${activeSection === id ? "bg-white/7 text-cyan-300" : "text-slate-400 hover:bg-white/5 hover:text-white"}`}>
+              <a key={id} href={`#${id}`} className={`rounded-lg px-3 py-2 text-xs font-medium transition ${activeSection === id ? "bg-blue-50 text-blue-600" : "text-slate-600 hover:bg-blue-50 hover:text-slate-900"}`}>
                 {label}
               </a>
             ))}
           </nav>
 
-          <a href="#contact" className="hidden rounded-xl border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-300/15 md:block">Let&apos;s Connect</a>
-          <button onClick={() => setMenuOpen((v) => !v)} className="rounded-xl border border-white/10 p-2 text-slate-200 md:hidden" aria-label={menuOpen ? "Tutup menu" : "Buka menu"}>
+          <a href="#contact" className="hidden rounded-xl border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-700 transition hover:bg-blue-100 md:block">Let&apos;s Connect</a>
+          <button onClick={() => setMenuOpen((v) => !v)} className="rounded-xl border border-blue-100 p-2 text-slate-700 md:hidden" aria-label={menuOpen ? "Tutup menu" : "Buka menu"}>
             {menuOpen ? <Icon.X /> : <Icon.Menu />}
           </button>
         </div>
@@ -176,7 +176,7 @@ export default function Home() {
         {menuOpen && (
           <div className="glass mx-auto mt-2 max-w-6xl rounded-2xl p-2 md:hidden">
             {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm text-slate-300 hover:bg-white/5 hover:text-white">{label}</a>
+              <a key={id} href={`#${id}`} onClick={closeMenu} className="block rounded-xl px-4 py-3 text-sm text-slate-600 hover:bg-blue-50 hover:text-slate-900">{label}</a>
             ))}
           </div>
         )}
@@ -185,41 +185,41 @@ export default function Home() {
       <section id="home" className="relative z-10 mx-auto flex min-h-screen max-w-6xl items-center px-6 pb-20 pt-36 lg:px-8">
         <div className="grid w-full gap-14 lg:grid-cols-[1.25fr_.75fr] lg:items-center">
           <div className="reveal">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/5 px-3 py-1.5 text-xs font-medium text-cyan-200">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-300" /> Available for IT Infrastructure opportunities
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-600" /> Available for IT Infrastructure opportunities
             </div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-slate-500">Hello, I&apos;m</p>
-            <h1 className="max-w-4xl text-5xl font-semibold tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-4xl text-5xl font-semibold tracking-[-0.045em] text-slate-900 sm:text-6xl lg:text-7xl">
               Frans Putra <span className="text-gradient">Sinaga.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
-              IT Infrastructure Professional yang berfokus pada <span className="text-cyan-200">Network Engineering</span>, <span className="text-cyan-200">System Administration</span>, dan <span className="text-cyan-200">IT Support</span>.
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl">
+              IT Infrastructure Professional yang berfokus pada <span className="text-blue-700">Network Engineering</span>, <span className="text-blue-700">System Administration</span>, dan <span className="text-blue-700">IT Support</span>.
             </p>
             <p className="mt-4 max-w-xl text-sm leading-7 text-slate-500">Fresh Graduate S1 Teknik Informatika • SMK Teknik Komputer Jaringan (TKJ) • Fondasi jaringan, sistem, dan troubleshooting.</p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="#contact" className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-100">
+              <a href="#contact" className="group inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
                 Hubungi Saya <Icon.ArrowUpRight size={17} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
-              <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/4 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/7">
+              <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-blue-50 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50">
                 <Icon.Github size={18} /> GitHub
               </a>
             </div>
 
             <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-slate-500">
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-cyan-400" /> Network & Infrastructure</span>
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-violet-400" /> System Support</span>
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-blue-400" /> Fresh Graduate 2026</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> Network & Infrastructure</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> System Support</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-blue-500" /> Fresh Graduate 2026</span>
             </div>
           </div>
 
           <div className="reveal relative mx-auto w-full max-w-md lg:justify-self-end">
             <div className="gradient-border glass relative overflow-hidden rounded-3xl p-6 sm:p-7">
-              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-cyan-400/10 blur-3xl" />
+              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-blue-500/10 blur-3xl" />
               <div className="relative">
                 <div className="mb-8 flex items-center justify-between">
-                  <span className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-mono text-[10px] text-slate-400">INFRA / 2026</span>
-                  <span className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> Online</span>
+                  <span className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 font-mono text-[10px] text-slate-600">INFRA / 2026</span>
+                  <span className="flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-emerald-600"><span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> Online</span>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -228,15 +228,15 @@ export default function Home() {
                     ["03", "Support", "Troubleshooting"],
                     ["04", "Mindset", "Problem Solving"],
                   ].map(([num, title, sub]) => (
-                    <div key={num} className="rounded-2xl border border-white/8 bg-black/20 p-4">
-                      <div className="mb-6 text-[10px] font-mono text-cyan-300/70">{num}</div>
-                      <div className="text-sm font-semibold text-white">{title}</div>
+                    <div key={num} className="rounded-2xl border border-blue-100 bg-blue-50/70 p-4">
+                      <div className="mb-6 text-[10px] font-mono text-blue-600">{num}</div>
+                      <div className="text-sm font-semibold text-slate-900">{title}</div>
                       <div className="mt-1 text-[11px] leading-5 text-slate-500">{sub}</div>
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 rounded-2xl border border-cyan-300/10 bg-cyan-300/5 p-4">
-                  <div className="flex items-center gap-3"><div className="grid h-9 w-9 place-items-center rounded-xl bg-cyan-300/10 text-cyan-300"><Icon.Server size={18} /></div><div><div className="text-xs font-semibold text-white">Infrastructure-first</div><div className="text-[11px] text-slate-500">Build • Support • Improve</div></div></div>
+                <div className="mt-4 rounded-2xl border border-blue-200 bg-blue-50 p-4">
+                  <div className="flex items-center gap-3"><div className="grid h-9 w-9 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon.Server size={18} /></div><div><div className="text-xs font-semibold text-slate-900">Infrastructure-first</div><div className="text-[11px] text-slate-500">Build • Support • Improve</div></div></div>
                 </div>
               </div>
             </div>
@@ -251,17 +251,17 @@ export default function Home() {
         <div className="grid gap-5 lg:grid-cols-[1.1fr_.9fr]">
           <article className="reveal glass glass-hover rounded-3xl p-7 sm:p-9">
             <div className="flex items-start gap-4">
-              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-cyan-300/10 text-cyan-300"><Icon.Network /></div>
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-blue-50 text-blue-600"><Icon.Network /></div>
               <div>
-                <h3 className="text-lg font-semibold text-white">Infrastructure meets systems</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-400">Saya memulai perjalanan teknis melalui <strong className="font-medium text-slate-200">SMK Teknik Komputer Jaringan</strong> dan lulus pada 2017. Fondasi tersebut membawa saya pada pengalaman praktik jaringan, perangkat keras, dan client-server.</p>
-                <p className="mt-4 text-sm leading-7 text-slate-400">Di jenjang <strong className="font-medium text-slate-200">S1 Teknik Informatika</strong>, saya memperluas perspektif terhadap aplikasi dan sistem informasi, lalu lulus pada 2026. Fokus saya tetap berada pada infrastruktur—namun saya memahami bagaimana infrastruktur menjadi bagian dari alur sistem yang lebih besar.</p>
+                <h3 className="text-lg font-semibold text-slate-900">Infrastructure meets systems</h3>
+                <p className="mt-4 text-sm leading-7 text-slate-600">Saya memulai perjalanan teknis melalui <strong className="font-medium text-slate-700">SMK Teknik Komputer Jaringan</strong> dan lulus pada 2017. Fondasi tersebut membawa saya pada pengalaman praktik jaringan, perangkat keras, dan client-server.</p>
+                <p className="mt-4 text-sm leading-7 text-slate-600">Di jenjang <strong className="font-medium text-slate-700">S1 Teknik Informatika</strong>, saya memperluas perspektif terhadap aplikasi dan sistem informasi, lalu lulus pada 2026. Fokus saya tetap berada pada infrastruktur—namun saya memahami bagaimana infrastruktur menjadi bagian dari alur sistem yang lebih besar.</p>
               </div>
             </div>
           </article>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-            <article className="reveal glass glass-hover rounded-3xl p-6"><div className="flex items-center gap-3"><Icon.Graduation className="text-violet-300" /><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Education</span></div><div className="mt-4 text-xl font-semibold text-white">S1 Teknik Informatika</div><div className="mt-1 text-sm text-slate-500">Lulus 2026 • Fresh Graduate</div></article>
-            <article className="reveal glass glass-hover rounded-3xl p-6"><div className="flex items-center gap-3"><Icon.Network className="text-cyan-300" /><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Foundation</span></div><div className="mt-4 text-xl font-semibold text-white">SMK TKJ</div><div className="mt-1 text-sm text-slate-500">Lulus 2017 • Jaringan & Infrastruktur</div></article>
+            <article className="reveal glass glass-hover rounded-3xl p-6"><div className="flex items-center gap-3"><Icon.Graduation className="text-blue-600" /><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Education</span></div><div className="mt-4 text-xl font-semibold text-slate-900">S1 Teknik Informatika</div><div className="mt-1 text-sm text-slate-500">Lulus 2026 • Fresh Graduate</div></article>
+            <article className="reveal glass glass-hover rounded-3xl p-6"><div className="flex items-center gap-3"><Icon.Network className="text-blue-600" /><span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Foundation</span></div><div className="mt-4 text-xl font-semibold text-slate-900">SMK TKJ</div><div className="mt-1 text-sm text-slate-500">Lulus 2017 • Jaringan & Infrastruktur</div></article>
           </div>
         </div>
       </section>
@@ -273,14 +273,14 @@ export default function Home() {
           <div className="space-y-8">
             {experiences.map((item, index) => (
               <article key={item.company} className="reveal relative pl-8 sm:pl-12">
-                <div className="absolute -left-[5px] top-5 h-2.5 w-2.5 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,.65)]" />
+                <div className="absolute -left-[5px] top-5 h-2.5 w-2.5 rounded-full bg-blue-600 shadow-[0_0_18px_rgba(34,211,238,.65)]" />
                 <div className="glass glass-hover rounded-3xl p-6 sm:p-8">
                   <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
-                    <div><div className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">{item.period}</div><h3 className="mt-2 text-xl font-semibold text-white">{item.company}</h3><p className="mt-1 text-sm text-slate-500">{item.role}</p></div>
-                    <div className="rounded-lg border border-white/8 bg-white/3 px-3 py-1.5 text-[10px] font-mono text-slate-500">0{index + 1}</div>
+                    <div><div className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-600">{item.period}</div><h3 className="mt-2 text-xl font-semibold text-slate-900">{item.company}</h3><p className="mt-1 text-sm text-slate-500">{item.role}</p></div>
+                    <div className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 text-[10px] font-mono text-slate-500">0{index + 1}</div>
                   </div>
-                  <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-400">{item.description}</p>
-                  <div className="mt-6 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-lg border border-white/8 bg-white/3 px-3 py-1.5 text-[11px] text-slate-400">{tag}</span>)}</div>
+                  <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-600">{item.description}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-lg border border-blue-100 bg-blue-50 px-3 py-1.5 text-[11px] text-slate-600">{tag}</span>)}</div>
                 </div>
               </article>
             ))}
@@ -293,9 +293,9 @@ export default function Home() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {skills.map((skill) => (
             <article key={skill.name} className="reveal skill-shine glass glass-hover rounded-2xl p-5">
-              <div className="flex items-center justify-between"><div className="grid h-10 w-10 place-items-center rounded-xl bg-white/5 text-cyan-300">{skill.icon === "network" ? <Icon.Network size={19} /> : skill.icon === "server" ? <Icon.Server size={19} /> : <Icon.Shield size={19} />}</div><span className="text-[10px] uppercase tracking-[0.16em] text-slate-600">{skill.level}</span></div>
-              <h3 className="mt-6 text-base font-semibold text-white">{skill.name}</h3>
-              <div className="mt-3 h-1 overflow-hidden rounded-full bg-white/5"><div className="h-full w-[78%] rounded-full bg-gradient-to-r from-cyan-400/70 to-blue-400/60" /></div>
+              <div className="flex items-center justify-between"><div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-blue-600">{skill.icon === "network" ? <Icon.Network size={19} /> : skill.icon === "server" ? <Icon.Server size={19} /> : <Icon.Shield size={19} />}</div><span className="text-[10px] uppercase tracking-[0.16em] text-slate-600">{skill.level}</span></div>
+              <h3 className="mt-6 text-base font-semibold text-slate-900">{skill.name}</h3>
+              <div className="mt-3 h-1 overflow-hidden rounded-full bg-blue-50"><div className="h-full w-[78%] rounded-full bg-gradient-to-r from-blue-500 to-blue-700" /></div>
             </article>
           ))}
         </div>
@@ -305,22 +305,22 @@ export default function Home() {
         <div className="reveal"><SectionHeading eyebrow="04 / Certifications & Documents" title="Bukti pendidikan, kompetensi, dan pengalaman." description="Beberapa dokumen pendukung yang relevan dengan perjalanan pendidikan dan fondasi teknis saya. Untuk keamanan publik, bagian data identitas sensitif pada preview telah disamarkan." /></div>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {certifications.map((cert, index) => (
-            <article key={cert.title} className="reveal group overflow-hidden rounded-3xl border border-white/10 bg-slate-950/60 shadow-2xl shadow-blue-950/20 transition duration-300 hover:-translate-y-1 hover:border-blue-400/30">
-              <div className="relative aspect-[4/3] overflow-hidden bg-slate-900">
+            <article key={cert.title} className="reveal group overflow-hidden rounded-3xl border border-blue-100 bg-white/85 shadow-2xl shadow-blue-900/10 transition duration-300 hover:-translate-y-1 hover:border-blue-200">
+              <div className="relative aspect-[4/3] overflow-hidden bg-white">
                 <img src={cert.image} alt={cert.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/90 to-transparent" />
-                <span className="absolute left-4 top-4 rounded-full border border-blue-300/20 bg-slate-950/70 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-200 backdrop-blur">DOC-0{index + 1}</span>
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-blue-900/55 to-transparent" />
+                <span className="absolute left-4 top-4 rounded-full border border-blue-200 bg-white/85 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700 backdrop-blur">DOC-0{index + 1}</span>
               </div>
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-base font-semibold leading-6 text-white">{cert.title}</h3>
-                    <p className="mt-2 text-xs font-medium text-blue-300">{cert.issuer}</p>
+                    <h3 className="text-base font-semibold leading-6 text-slate-900">{cert.title}</h3>
+                    <p className="mt-2 text-xs font-medium text-blue-600">{cert.issuer}</p>
                   </div>
-                  <span className="shrink-0 rounded-lg border border-white/8 bg-white/5 px-2.5 py-1 text-[10px] font-mono text-slate-500">{cert.year}</span>
+                  <span className="shrink-0 rounded-lg border border-blue-100 bg-blue-50 px-2.5 py-1 text-[10px] font-mono text-slate-500">{cert.year}</span>
                 </div>
                 <p className="mt-4 text-sm leading-6 text-slate-500">{cert.description}</p>
-                <a href={cert.image} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-cyan-300 transition hover:text-cyan-200">Lihat dokumen <Icon.ArrowUpRight size={14} /></a>
+                <a href={cert.image} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-blue-600 transition hover:text-blue-700">Lihat dokumen <Icon.ArrowUpRight size={14} /></a>
               </div>
             </article>
           ))}
@@ -328,27 +328,27 @@ export default function Home() {
       </section>
 
       <section id="contact" className="relative z-10 mx-auto max-w-6xl scroll-mt-28 px-6 pb-24 pt-24 lg:px-8">
-        <div className="reveal overflow-hidden rounded-[2rem] border border-cyan-300/15 bg-gradient-to-br from-cyan-300/8 via-white/[0.025] to-violet-400/8 p-8 sm:p-12">
+        <div className="reveal overflow-hidden rounded-[2rem] border border-blue-200 bg-gradient-to-br from-blue-100/80 via-white/90 to-blue-50/80 p-8 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div><div className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-300">05 / Contact</div><h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-5xl">Siap berdiskusi tentang jaringan, sistem, dan infrastruktur IT.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-400">Terbuka untuk peluang kerja, networking profesional, project support, dan diskusi seputar IT Infrastructure.</p></div>
-            <a href="mailto:fransputra.sinaga@example.com" className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5 hover:bg-cyan-100"><Icon.Mail size={18} /> Email Me <Icon.ArrowUpRight size={16} /></a>
+            <div><div className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-600">05 / Contact</div><h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Siap berdiskusi tentang jaringan, sistem, dan infrastruktur IT.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-600">Terbuka untuk peluang kerja, networking profesional, project support, dan diskusi seputar IT Infrastructure.</p></div>
+            <a href="mailto:fransputra.sinaga@example.com" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700"><Icon.Mail size={18} /> Email Me <Icon.ArrowUpRight size={16} /></a>
           </div>
-          <div className="mt-10 flex flex-wrap gap-3 border-t border-white/8 pt-6">
-            <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Github size={16} /> github.com/namasayafrans</a>
-            <a href="https://www.instagram.com/fransp_sinaga?stkn=YWM0ZWt3NTdkenB5" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Instagram size={16} /> @fransp_sinaga</a>
-            <a href="https://www.facebook.com/profile.php?id=100004485286793" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/8 bg-black/20 px-4 py-2.5 text-xs text-slate-300 transition hover:border-cyan-300/20 hover:text-white"><Icon.Facebook size={16} /> Frans Putra Sinaga</a>
+          <div className="mt-10 flex flex-wrap gap-3 border-t border-blue-100 pt-6">
+            <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-2.5 text-xs text-slate-600 transition hover:border-blue-200 hover:text-slate-900"><Icon.Github size={16} /> github.com/namasayafrans</a>
+            <a href="https://www.instagram.com/fransp_sinaga?stkn=YWM0ZWt3NTdkenB5" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-2.5 text-xs text-slate-600 transition hover:border-blue-200 hover:text-slate-900"><Icon.Instagram size={16} /> @fransp_sinaga</a>
+            <a href="https://www.facebook.com/profile.php?id=100004485286793" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-2.5 text-xs text-slate-600 transition hover:border-blue-200 hover:text-slate-900"><Icon.Facebook size={16} /> Frans Putra Sinaga</a>
           </div>
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-white/6">
+      <footer className="relative z-10 border-t border-blue-100">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-8 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <span>© {new Date().getFullYear()} Frans Putra Sinaga. Built for the infrastructure mindset.</span>
           <span className="font-mono">Network • Systems • Support</span>
         </div>
       </footer>
 
-      {showTop && <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-xl border border-white/10 bg-slate-900/90 text-slate-200 shadow-2xl backdrop-blur transition hover:-translate-y-1 hover:border-cyan-300/25 hover:text-cyan-300" aria-label="Kembali ke atas">↑</button>}
+      {showTop && <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="fixed bottom-6 right-6 z-50 grid h-11 w-11 place-items-center rounded-xl border border-blue-100 bg-white/95 text-slate-700 shadow-2xl backdrop-blur transition hover:-translate-y-1 hover:border-blue-200 hover:text-blue-600" aria-label="Kembali ke atas">↑</button>}
     </main>
   );
 }
