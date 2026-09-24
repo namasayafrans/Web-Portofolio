@@ -68,6 +68,27 @@ const experiences = [
 
 const projects = [
   {
+    number: "01",
+    title: "Perancangan & Simulasi Dasar Jaringan Komputer Kantor Berbasis Arsitektur Client-Server",
+    company: "Kajian Mandiri & Penelitian Universitas Pelita Bangsa",
+    description:
+      "Cetak biru (blueprint) dan simulasi jaringan lokal (LAN) skala kecil menggunakan Topologi Star dan metodologi Waterfall untuk mengotomatisasi manajemen alamat jaringan berbasis DHCP Server demi mengatasi kendala konfigurasi manual di perkantoran.",
+    role: "Network Simulation & Infrastructure",
+    stack: ["Cisco Packet Tracer 8.2.2", "Command Prompt (Ping Testing)", "Metodologi Waterfall", "IPv4 Addressing"],
+    features: ["DHCP Server Configuration", "IP Conflict Prevention", "Centralized Star Topology", "Connectivity Verification"],
+    recruiterNote:
+      "Simulasi menggunakan model 1 Server-Utama, 1 Switch, dan 3 PC Client dengan hasil validasi Ping testing sukses penuh (0% packet loss).",
+    github: "",
+    demo: "",
+    screenshots: [
+      { src: "/projects/network-simulation/topology-star.png", label: "Topologi Star — 1 Server, 1 Switch, 3 PC Client" },
+      { src: "/projects/network-simulation/server-ip.png", label: "Konfigurasi IP Server-Utama" },
+      { src: "/projects/network-simulation/client-dhcp.png", label: "DHCP request successful pada PC Client" },
+      { src: "/projects/network-simulation/ping-test.png", label: "Ping testing — 0% packet loss" },
+    ],
+  },
+  {
+    number: "02",
     title: "Sistem Informasi Pengendalian Material Produksi Radiator",
     company: "PT Batara Sura Mulia",
     description:
@@ -75,6 +96,8 @@ const projects = [
     role: "System Information Project",
     stack: ["HTML5", "CSS3", "JavaScript", "PHP Native", "MySQL"],
     features: ["Material catalog", "Live stock monitoring", "Low-stock alert", "Production estimation", "Stock reporting"],
+    recruiterNote:
+      "Dashboard, autentikasi, tampilan admin, dan supervisor menunjukkan bahwa project ini bukan sekadar halaman statis, tetapi sistem dengan beberapa alur pengguna.",
     github: "https://github.com/namasayafrans/sistem-informasi-pengendalian-material-",
     demo: "https://materialku-bsm.site.je/?i=1",
     screenshots: [
@@ -316,7 +339,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="03 / Projects"
             title="Project nyata yang bisa langsung dilihat."
-            description="Salah satu project yang paling relevan dengan perjalanan saya adalah Sistem Informasi Pengendalian Material untuk mendukung alur operasional produksi di PT Batara Sura Mulia."
+            description="Kumpulan project yang menunjukkan kemampuan saya dalam network infrastructure, system information, simulasi jaringan, dan dukungan operasional IT."
           />
         </div>
 
@@ -354,7 +377,7 @@ export default function Home() {
                     <h3 className="mt-2 max-w-2xl text-2xl font-semibold tracking-tight text-slate-900">{project.title}</h3>
                     <p className="mt-2 text-sm font-medium text-slate-500">{project.company}</p>
                   </div>
-                  <div className="shrink-0 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-[10px] font-mono text-blue-700">PROJECT 01</div>
+                  <div className="shrink-0 rounded-xl border border-blue-100 bg-blue-50 px-3 py-2 text-[10px] font-mono text-blue-700">PROJECT {project.number}</div>
                 </div>
 
                 <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-600">{project.description}</p>
@@ -381,17 +404,23 @@ export default function Home() {
 
                 <div className="mt-5 rounded-2xl border border-blue-100 bg-blue-50/70 p-5">
                   <div className="text-xs font-semibold text-slate-900">Yang bisa dilihat recruiter</div>
-                  <p className="mt-2 text-xs leading-6 text-slate-600">Dashboard, autentikasi, tampilan admin, dan supervisor menunjukkan bahwa project ini bukan sekadar halaman statis, tetapi sistem dengan beberapa alur pengguna.</p>
+                  <p className="mt-2 text-xs leading-6 text-slate-600">{project.recruiterNote}</p>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
-                  <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
-                    Live Demo <Icon.ArrowUpRight size={14} />
-                  </a>
-                  <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-5 py-3 text-xs font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50">
-                    <Icon.Github size={16} /> Source Code <Icon.ArrowUpRight size={14} />
-                  </a>
-                </div>
+                {(project.demo || project.github) && (
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                    {project.demo && (
+                      <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
+                        Live Demo <Icon.ArrowUpRight size={14} />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border border-blue-100 bg-white px-5 py-3 text-xs font-semibold text-blue-700 transition hover:-translate-y-0.5 hover:border-blue-200 hover:bg-blue-50">
+                        <Icon.Github size={16} /> Source Code <Icon.ArrowUpRight size={14} />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </article>
