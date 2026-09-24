@@ -54,3 +54,11 @@ Folder `public/certificates` berisi tiga dokumen yang ditampilkan pada portfolio
 - Surat Keterangan PKL PT Suzuki Indomobil Motor
 
 Preview publik telah disanitasi pada area data identitas tertentu. Jika ingin mengganti dengan versi asli, pastikan data pribadi seperti NIK/NIM/tanggal lahir memang aman untuk dipublikasikan.
+
+
+### Project gallery
+- Screenshot project ditampilkan dalam satu carousel/box.
+- Navigasi memakai tombol kiri/kanan dan indikator slide.
+- Tidak auto-slide; user mengontrol perpindahan gambar.
+- Gambar menggunakan `object-contain` agar seluruh screenshot tetap terlihat.
+- Klik gambar untuk membuka preview ukuran besar.

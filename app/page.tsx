@@ -178,21 +178,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setProjectSlideIndex((current) => {
-        const next = { ...current };
-        projects.forEach((project) => {
-          const currentIndex = current[project.number] ?? 0;
-          next[project.number] = (currentIndex + 1) % project.screenshots.length;
-        });
-        return next;
-      });
-    }, 2000);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
     const revealItems = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible")),
@@ -363,52 +348,79 @@ export default function Home() {
         {projects.map((project) => (
           <article key={project.title} className="reveal overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-2xl shadow-blue-900/10">
             <div className="border-b border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-5 sm:p-7">
-              <div className="grid gap-4 lg:grid-cols-[1.55fr_.45fr]">
+              <div className="grid gap-4">
                 {(() => {
                   const activeIndex = projectSlideIndex[project.number] ?? 0;
-                  const activeShot = project.screenshots[activeIndex];
+                  const goToSlide = (nextIndex: number) => {
+                    const total = project.screenshots.length;
+                    setProjectSlideIndex((current) => ({
+                      ...current,
+                      [project.number]: (nextIndex + total) % total,
+                    }));
+                  };
 
                   return (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => setSelectedProjectImage(activeShot.src)}
-                        className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white text-left shadow-lg shadow-blue-900/10"
-                        aria-label={`Perbesar ${activeShot.label}`}
+                    <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-slate-950 shadow-xl shadow-blue-900/10">
+                      <div
+                        className="flex w-full transition-transform duration-500 ease-out"
+                        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
                       >
-                        <img
-                          key={activeShot.src}
-                          src={activeShot.src}
-                          alt={`${project.title} — ${activeShot.label}`}
-                          className="h-full min-h-[250px] w-full object-cover object-top transition-opacity duration-500 sm:min-h-[330px]"
-                        />
-                        <span className="absolute bottom-4 left-4 rounded-full border border-white/70 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-700 shadow backdrop-blur">Auto slideshow • 2 detik</span>
-                        <span className="absolute bottom-4 right-4 rounded-full bg-slate-900/80 px-3 py-1.5 text-[10px] font-medium text-white opacity-0 transition group-hover:opacity-100">Click to enlarge</span>
-                        <div className="absolute left-1/2 top-4 flex -translate-x-1/2 gap-1.5 rounded-full bg-white/80 px-2 py-1 backdrop-blur">
-                          {project.screenshots.map((shot, index) => (
-                            <span key={shot.src} className={`h-1.5 w-1.5 rounded-full transition ${index === activeIndex ? "bg-blue-600" : "bg-slate-300"}`} aria-hidden="true" />
-                          ))}
-                        </div>
-                      </button>
-
-                      <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
-                        {project.screenshots.map((shot, index) => (
+                        {project.screenshots.map((shot) => (
                           <button
                             key={shot.src}
                             type="button"
-                            onClick={() => {
-                              setProjectSlideIndex((current) => ({ ...current, [project.number]: index }));
-                              setSelectedProjectImage(shot.src);
-                            }}
-                            className={`group relative overflow-hidden rounded-2xl border bg-white shadow-sm transition ${index === activeIndex ? "border-blue-400 ring-2 ring-blue-100" : "border-blue-100"}`}
-                            aria-label={`Lihat ${shot.label}`}
+                            onClick={() => setSelectedProjectImage(shot.src)}
+                            className="group relative min-w-full bg-slate-950 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-inset"
+                            aria-label={`Perbesar ${shot.label}`}
                           >
-                            <img src={shot.src} alt={`${project.title} — ${shot.label}`} className="h-full min-h-[105px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" />
-                            <span className="absolute inset-x-2 bottom-2 rounded-lg bg-slate-950/70 px-2 py-1.5 text-[9px] font-medium text-white opacity-0 transition group-hover:opacity-100">{shot.label}</span>
+                            <div className="flex aspect-[16/9] w-full items-center justify-center p-2 sm:p-4">
+                              <img
+                                src={shot.src}
+                                alt={`${project.title} — ${shot.label}`}
+                                className="max-h-full max-w-full rounded-lg object-contain transition duration-300 group-hover:scale-[1.01]"
+                              />
+                            </div>
+                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent px-5 pb-5 pt-12 text-left">
+                              <span className="text-xs font-medium text-white/90">{shot.label}</span>
+                            </div>
+                            <span className="absolute right-4 top-4 rounded-full border border-white/20 bg-slate-950/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-white backdrop-blur">Click to enlarge</span>
                           </button>
                         ))}
                       </div>
-                    </>
+
+                      {project.screenshots.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={() => goToSlide(activeIndex - 1)}
+                            className="absolute left-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-slate-950/65 text-2xl text-white shadow-lg backdrop-blur transition hover:scale-105 hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                            aria-label="Gambar sebelumnya"
+                          >
+                            ‹
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => goToSlide(activeIndex + 1)}
+                            className="absolute right-3 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-slate-950/65 text-2xl text-white shadow-lg backdrop-blur transition hover:scale-105 hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+                            aria-label="Gambar berikutnya"
+                          >
+                            ›
+                          </button>
+
+                          <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5 rounded-full border border-white/15 bg-slate-950/60 px-2.5 py-1.5 backdrop-blur">
+                            {project.screenshots.map((shot, index) => (
+                              <button
+                                key={shot.src}
+                                type="button"
+                                onClick={() => goToSlide(index)}
+                                className={`h-1.5 rounded-full transition-all ${index === activeIndex ? "w-6 bg-white" : "w-1.5 bg-white/45 hover:bg-white/75"}`}
+                                aria-label={`Ke slide ${index + 1}: ${shot.label}`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
                   );
                 })()}
               </div>
