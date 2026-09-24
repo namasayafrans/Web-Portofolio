@@ -72,12 +72,13 @@ const projects = [
     title: "Perancangan & Simulasi Dasar Jaringan Komputer Kantor Berbasis Arsitektur Client-Server",
     company: "Kajian Mandiri & Penelitian Universitas Pelita Bangsa",
     description:
-      "Cetak biru (blueprint) dan simulasi jaringan lokal (LAN) skala kecil menggunakan Topologi Star dan metodologi Waterfall untuk mengotomatisasi manajemen alamat jaringan berbasis DHCP Server demi mengatasi kendala konfigurasi manual di perkantoran.",
+      "Simulasi rancangan jaringan lokal (LAN) kantor dengan implementasi DHCP Server terpusat untuk otomasi pengalamatan IP dinamis secara otomatis, guna mencegah risiko IP conflict pada jaringan operasional kantor.",
     role: "Network Simulation & Infrastructure",
     stack: ["Cisco Packet Tracer 8.2.2", "Command Prompt (Ping Testing)", "Metodologi Waterfall", "IPv4 Addressing"],
     features: ["DHCP Server Configuration", "IP Conflict Prevention", "Centralized Star Topology", "Connectivity Verification"],
     recruiterNote:
-      "Simulasi menggunakan model 1 Server-Utama, 1 Switch, dan 3 PC Client dengan hasil validasi Ping testing sukses penuh (0% packet loss).",
+      "Validasi konektivitas antarperangkat (1 Server, 1 Switch, 3 PC Client) melalui Ping testing dengan hasil sukses penuh dan 0% packet loss.",
+    cvDownload: "/documents/paper-it-infrastruktur.docx",
     github: "",
     demo: "",
     screenshots: [
@@ -381,6 +382,17 @@ export default function Home() {
                 </div>
 
                 <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-600">{project.description}</p>
+
+                {project.number === "01" && (
+                  <a
+                    href={project.cvDownload}
+                    download
+                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700"
+                  >
+                    Download Detail Project (Word)
+                    <Icon.ArrowUpRight size={14} />
+                  </a>
+                )}
 
                 <div className="mt-7">
                   <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Key capabilities</div>
