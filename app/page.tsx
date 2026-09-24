@@ -78,7 +78,7 @@ const projects = [
     features: ["DHCP Server Configuration", "IP Conflict Prevention", "Centralized Star Topology", "Connectivity Verification"],
     recruiterNote:
       "Validasi konektivitas antarperangkat (1 Server, 1 Switch, 3 PC Client) melalui Ping testing dengan hasil sukses penuh dan 0% packet loss.",
-    cvDownload: "/documents/paper-it-infrastruktur.docx",
+    detailDownload: "/documents/paper-it-infrastruktur.docx",
     github: "",
     demo: "",
     screenshots: [
@@ -151,6 +151,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
   const [showTop, setShowTop] = useState(false);
   const [selectedProjectImage, setSelectedProjectImage] = useState<string | null>(null);
+  const [projectSlideIndex, setProjectSlideIndex] = useState<Record<string, number>>({});
 
   useEffect(() => {
     const sections = ["home", ...navItems.map(([, id]) => id)]
@@ -174,6 +175,21 @@ export default function Home() {
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setProjectSlideIndex((current) => {
+        const next = { ...current };
+        projects.forEach((project) => {
+          const currentIndex = current[project.number] ?? 0;
+          next[project.number] = (currentIndex + 1) % project.screenshots.length;
+        });
+        return next;
+      });
+    }, 2000);
+
+    return () => window.clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -348,25 +364,53 @@ export default function Home() {
           <article key={project.title} className="reveal overflow-hidden rounded-[2rem] border border-blue-100 bg-white shadow-2xl shadow-blue-900/10">
             <div className="border-b border-blue-100 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-5 sm:p-7">
               <div className="grid gap-4 lg:grid-cols-[1.55fr_.45fr]">
-                <button
-                  type="button"
-                  onClick={() => setSelectedProjectImage(project.screenshots[0].src)}
-                  className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white text-left shadow-lg shadow-blue-900/10"
-                  aria-label={`Perbesar ${project.screenshots[0].label}`}
-                >
-                  <img src={project.screenshots[0].src} alt={`${project.title} — ${project.screenshots[0].label}`} className="h-full min-h-[250px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.02] sm:min-h-[330px]" />
-                  <span className="absolute bottom-4 left-4 rounded-full border border-white/70 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-700 shadow backdrop-blur">Live project preview</span>
-                  <span className="absolute bottom-4 right-4 rounded-full bg-slate-900/80 px-3 py-1.5 text-[10px] font-medium text-white opacity-0 transition group-hover:opacity-100">Click to enlarge</span>
-                </button>
+                {(() => {
+                  const activeIndex = projectSlideIndex[project.number] ?? 0;
+                  const activeShot = project.screenshots[activeIndex];
 
-                <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
-                  {project.screenshots.slice(1).map((shot) => (
-                    <button key={shot.src} type="button" onClick={() => setSelectedProjectImage(shot.src)} className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white shadow-sm" aria-label={`Perbesar ${shot.label}`}>
-                      <img src={shot.src} alt={`${project.title} — ${shot.label}`} className="h-full min-h-[105px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" />
-                      <span className="absolute inset-x-2 bottom-2 rounded-lg bg-slate-950/70 px-2 py-1.5 text-[9px] font-medium text-white opacity-0 transition group-hover:opacity-100">{shot.label}</span>
-                    </button>
-                  ))}
-                </div>
+                  return (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedProjectImage(activeShot.src)}
+                        className="group relative overflow-hidden rounded-2xl border border-blue-100 bg-white text-left shadow-lg shadow-blue-900/10"
+                        aria-label={`Perbesar ${activeShot.label}`}
+                      >
+                        <img
+                          key={activeShot.src}
+                          src={activeShot.src}
+                          alt={`${project.title} — ${activeShot.label}`}
+                          className="h-full min-h-[250px] w-full object-cover object-top transition-opacity duration-500 sm:min-h-[330px]"
+                        />
+                        <span className="absolute bottom-4 left-4 rounded-full border border-white/70 bg-white/90 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-blue-700 shadow backdrop-blur">Auto slideshow • 2 detik</span>
+                        <span className="absolute bottom-4 right-4 rounded-full bg-slate-900/80 px-3 py-1.5 text-[10px] font-medium text-white opacity-0 transition group-hover:opacity-100">Click to enlarge</span>
+                        <div className="absolute left-1/2 top-4 flex -translate-x-1/2 gap-1.5 rounded-full bg-white/80 px-2 py-1 backdrop-blur">
+                          {project.screenshots.map((shot, index) => (
+                            <span key={shot.src} className={`h-1.5 w-1.5 rounded-full transition ${index === activeIndex ? "bg-blue-600" : "bg-slate-300"}`} aria-hidden="true" />
+                          ))}
+                        </div>
+                      </button>
+
+                      <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
+                        {project.screenshots.map((shot, index) => (
+                          <button
+                            key={shot.src}
+                            type="button"
+                            onClick={() => {
+                              setProjectSlideIndex((current) => ({ ...current, [project.number]: index }));
+                              setSelectedProjectImage(shot.src);
+                            }}
+                            className={`group relative overflow-hidden rounded-2xl border bg-white shadow-sm transition ${index === activeIndex ? "border-blue-400 ring-2 ring-blue-100" : "border-blue-100"}`}
+                            aria-label={`Lihat ${shot.label}`}
+                          >
+                            <img src={shot.src} alt={`${project.title} — ${shot.label}`} className="h-full min-h-[105px] w-full object-cover object-top transition duration-500 group-hover:scale-[1.04]" />
+                            <span className="absolute inset-x-2 bottom-2 rounded-lg bg-slate-950/70 px-2 py-1.5 text-[9px] font-medium text-white opacity-0 transition group-hover:opacity-100">{shot.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             </div>
 
@@ -382,17 +426,6 @@ export default function Home() {
                 </div>
 
                 <p className="mt-6 max-w-3xl text-sm leading-7 text-slate-600">{project.description}</p>
-
-                {project.number === "01" && (
-                  <a
-                    href={project.cvDownload}
-                    download
-                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700"
-                  >
-                    Download Detail Project (Word)
-                    <Icon.ArrowUpRight size={14} />
-                  </a>
-                )}
 
                 <div className="mt-7">
                   <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-400">Key capabilities</div>
@@ -419,8 +452,17 @@ export default function Home() {
                   <p className="mt-2 text-xs leading-6 text-slate-600">{project.recruiterNote}</p>
                 </div>
 
-                {(project.demo || project.github) && (
+                {(project.number === "01" || project.demo || project.github) && (
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
+                    {project.number === "01" && (
+                      <a
+                        href={project.detailDownload}
+                        download
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700"
+                      >
+                        Download Detail Project (Word) <Icon.ArrowUpRight size={14} />
+                      </a>
+                    )}
                     {project.demo && (
                       <a href={project.demo} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-xs font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700">
                         Live Demo <Icon.ArrowUpRight size={14} />
