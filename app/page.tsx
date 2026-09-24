@@ -536,7 +536,7 @@ export default function Home() {
         <div className="reveal overflow-hidden rounded-[2rem] border border-blue-200 bg-gradient-to-br from-blue-100/80 via-white/90 to-blue-50/80 p-8 sm:p-12">
           <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
             <div><div className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-blue-600">06 / Contact</div><h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-slate-900 sm:text-5xl">Siap berdiskusi tentang jaringan, sistem, dan infrastruktur IT.</h2><p className="mt-5 max-w-2xl text-sm leading-7 text-slate-600">Terbuka untuk peluang kerja, networking profesional, project support, dan diskusi seputar IT Infrastructure.</p></div>
-            <a href="mailto:fransputra.sinaga@example.com" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700"><Icon.Mail size={18} /> Email Me <Icon.ArrowUpRight size={16} /></a>
+            <a href="mailto:sinagafrans38@gmail.com" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-blue-700"><Icon.Mail size={18} /> Email Me <Icon.ArrowUpRight size={16} /></a>
           </div>
           <div className="mt-10 flex flex-wrap gap-3 border-t border-blue-100 pt-6">
             <a href="https://github.com/namasayafrans" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-blue-100 bg-blue-50/70 px-4 py-2.5 text-xs text-slate-600 transition hover:border-blue-200 hover:text-slate-900"><Icon.Github size={16} /> github.com/namasayafrans</a>
